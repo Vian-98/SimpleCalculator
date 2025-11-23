@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Interaktif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #988686 0%, #5C4E4E 100%);
+        }
+        
+        .calculator {
+            background: #000000;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        
+        .display-container {
+            background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+            border-bottom: 3px solid #5C4E4E;
+        }
+        
+        #display-history {
+            color: #988686;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        #display-output {
+            color: #D1D0D0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .memory-section {
+            background: linear-gradient(135deg, #5C4E4E 0%, #3d3434 100%);
+            border-left: 4px solid #988686;
+        }
+        
+        .memory-btn {
+            background: #988686;
+            color: #000000;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .memory-btn:hover {
+            background: #D1D0D0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .memory-value {
+            color: #D1D0D0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        #history-list {
+            background: rgba(0,0,0,0.3);
+            color: #D1D0D0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+        
+        #history-list li {
+            padding: 4px 8px;
+            border-bottom: 1px solid rgba(152,134,134,0.2);
+        }
+        
+        .btn-number {
+            background: #D1D0D0;
+            color: #000000;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-number:hover {
+            background: #ffffff;
+            border-color: #988686;
+            transform: scale(1.05);
+        }
+        
+        .btn-number:active {
+            transform: scale(0.95);
+        }
+        
+        .btn-operator {
+            background: #988686;
+            color: #000000;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-operator:hover {
+            background: #D1D0D0;
+            border-color: #5C4E4E;
+            transform: scale(1.05);
+        }
+        
+        .btn-clear {
+            background: #5C4E4E;
+            color: #D1D0D0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-clear:hover {
+            background: #4a3f3f;
+            border-color: #988686;
+            transform: scale(1.05);
+        }
+        
+        .btn-equals {
+            background: linear-gradient(135deg, #988686 0%, #5C4E4E 100%);
+            color: #D1D0D0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            transition: all 0.2s ease;
+            border: 2px solid #D1D0D0;
+        }
+        
+        .btn-equals:hover {
+            background: linear-gradient(135deg, #5C4E4E 0%, #988686 100%);
+            box-shadow: 0 0 20px rgba(152,134,134,0.5);
+            transform: scale(1.05);
+        }
+        
+        button {
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .title {
+            background: linear-gradient(135deg, #D1D0D0 0%, #988686 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="calculator w-full max-w-5xl p-6">
+        <h1 class="title text-3xl text-center mb-6">CALCULATOR</h1>
+
+        <div class="display-container p-5 mb-5">
+            <div id="display-history" class="text-right h-6 overflow-hidden mb-2">0</div>
+            <div id="display-output" class="text-4xl md:text-5xl text-right break-all min-h-[60px] flex items-center justify-end">0</div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-0">
+            <div class="memory-section md:col-span-1 p-4 rounded-lg">
+                <h3 class="text-xs font-bold text-gray-300 mb-3 uppercase tracking-wider">Memory & History</h3>
+                <div class="mb-3">
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <button class="memory-btn text-xs px-3 py-2 rounded-lg" data-fn="M+">M+</button>
+                        <button class="memory-btn text-xs px-3 py-2 rounded-lg" data-fn="M-">M-</button>
+                        <button class="memory-btn text-xs px-3 py-2 rounded-lg" data-fn="MR">MR</button>
+                        <button class="memory-btn text-xs px-3 py-2 rounded-lg" data-fn="MC">MC</button>
+                    </div>
+                    <div class="memory-value text-xs text-center py-1" id="memory-value">M: 0</div>
+                </div>
+                <ul id="history-list" class="h-32 md:h-48 overflow-y-auto rounded-lg"></ul>
+            </div>
+
+            <div class="md:col-span-2">
+                <div class="grid grid-cols-4 gap-3" id="keypad">
+            <button class="btn-clear p-4 rounded-xl text-xl" data-type="clear" data-value="C">C</button>
+            <button class="btn-clear p-4 rounded-xl text-xl" data-type="clear" data-value="CE">CE</button>
+            <button class="btn-operator p-4 rounded-xl text-2xl" data-type="operator" data-value="÷">÷</button>
+            <button class="btn-operator p-4 rounded-xl text-2xl" data-type="operator" data-value="×">×</button>
+
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="number" data-value="7">7</button>
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="number" data-value="8">8</button>
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="number" data-value="9">9</button>
+            <button class="btn-operator p-4 rounded-xl text-2xl" data-type="operator" data-value="-">-</button>
+
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="number" data-value="4">4</button>
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="number" data-value="5">5</button>
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="number" data-value="6">6</button>
+            <button class="btn-operator p-4 rounded-xl text-2xl" data-type="operator" data-value="+">+</button>
+
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="number" data-value="1">1</button>
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="number" data-value="2">2</button>
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="number" data-value="3">3</button>
+            <button class="btn-equals p-4 rounded-xl row-span-2" data-type="equals" data-value="=">=</button>
+
+            <button class="col-span-2 btn-number p-4 rounded-xl text-xl" data-type="number" data-value="0">0</button>
+            <button class="btn-number p-4 rounded-xl text-xl" data-type="decimal" data-value=".">.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+</body>
+</html>
