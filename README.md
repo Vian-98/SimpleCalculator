@@ -23,6 +23,7 @@ Berikut adalah visualisasi dari berbagai fitur dan kondisi kalkulator.
 
 ### A. Tampilan Mobile & Responsive 
 Kalkulator menyesuaikan tata letak untuk perangkat vertikal (_mobile view_), mempertahankan keterbacaan dan aksesibilitas semua tombol.
+
 <img width="636" height="889" alt="Screenshot 2025-11-23 222356" src="https://github.com/user-attachments/assets/fe5b10ff-17c4-4d11-9650-e0b6d911fc2e" />
 
 ### B. Proses Perhitungan 
@@ -49,9 +50,12 @@ Karena ini adalah proyek berbasis _front-end_ murni, tidak ada _dependency_ yang
 
 1.  **Kloning Repositori:**
     ```bash
-    git clone 
+    git clone https://github.com/Vian-98/SimpleCalculator.git
     ```
 2.  **Jalankan:**
     Buka _file_ `index.html` langsung di _browser_ Anda.
+
+atau bisa gunakan link berikut : 
+https://vian-98.github.io/SimpleCalculator/
 
 ---
