@@ -38,7 +38,7 @@ Fungsi _error handling_ dalam `script.js` mendeteksi pembagian dengan nol dan me
 Menunjukkan fitur **MR** (_Memory Recall_). Nilai **M: 58** yang tersimpan di memori telah dipanggil dan ditampilkan di layar utama, siap untuk digunakan dalam perhitungan berikutnya.
 <img width="1080" height="634" alt="Screenshot 2025-11-23 222536" src="https://github.com/user-attachments/assets/026bd310-c514-441b-8da6-8b5a8c92d45f" />
 
-### E. Memori dan Riwayat Aktif (`Screenshot 2025-11-23 222548.png`)
+### E. Memori dan Riwayat Aktif 
 Menampilkan kondisi kalkulator saat memori aktif (**M: 30**) setelah operasi **M+** atau **M-** dilakukan. Riwayat perhitungan yang telah selesai (`78×94-65+85 = 7352`) tercatat di bawah nilai memori.
 <img width="1069" height="645" alt="Screenshot 2025-11-23 222548" src="https://github.com/user-attachments/assets/4bd9445b-b28e-48db-9276-ed56216c024c" />
 
